@@ -1,15 +1,22 @@
 'use client';
 
-import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarProvider } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useEffect, useState } from "react";
-import { generatePythonProblem } from "@/ai/flows/generate-python-problem";
-import { evaluateCodeAndProvideFeedback } from "@/ai/flows/evaluate-code-and-provide-feedback";
-import { generateHintBasedOnCode } from "@/ai/flows/generate-hint-based-on-code";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Icons } from "@/components/icons";
-import CodeEditor from "@/components/code-editor";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarProvider,
+} from '@/components/ui/sidebar';
+import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
+import {Icons} from '@/components/icons';
+import CodeEditor from '@/components/code-editor';
+import {useEffect, useState} from 'react';
+import {generatePythonProblem} from '@/ai/flows/generate-python-problem';
+import {evaluateCodeAndProvideFeedback} from '@/ai/flows/evaluate-code-and-provide-feedback';
+import {generateHintBasedOnCode} from '@/ai/flows/generate-hint-based-on-code';
 
 export default function Home() {
   const [problem, setProblem] = useState<any>(null);
@@ -25,7 +32,9 @@ export default function Home() {
       studentSkillLevel: studentSkillLevel,
     });
     setProblem(newProblem);
+    localStorage.setItem('problem', JSON.stringify(newProblem));
     setStudentCode('');
+    localStorage.removeItem('studentCode');
     setFeedback('');
     setHint('');
   };
@@ -52,8 +61,22 @@ export default function Home() {
   };
 
   useEffect(() => {
-    generateProblem();
+    const storedProblem = localStorage.getItem('problem');
+    if (storedProblem) {
+      setProblem(JSON.parse(storedProblem));
+    } else {
+      generateProblem();
+    }
+
+    const storedCode = localStorage.getItem('studentCode');
+    if (storedCode) {
+      setStudentCode(storedCode);
+    }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('studentCode', studentCode);
+  }, [studentCode]);
 
   return (
     <SidebarProvider>
@@ -61,6 +84,7 @@ export default function Home() {
         <Sidebar>
           <SidebarHeader>
             PuskSchool
+            <br />
             Раскройте свой потенциал в Python
           </SidebarHeader>
           <SidebarMenu>
@@ -71,8 +95,6 @@ export default function Home() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
-
-
         </Sidebar>
 
         <div className="flex-1 p-4">
@@ -85,20 +107,15 @@ export default function Home() {
               {problem ? (
                 <>
                   <div>
-                    Описание:
-                    {problem.problemDescription}
+                    Описание: {problem.problemDescription}
                     <br />
-                    Концепция:
-                    {problem.problemConcept}
+                    Концепция: {problem.problemConcept}
                     <br />
-                    Сложность:
-                    {problem.difficultyLevel}
+                    Сложность: {problem.difficultyLevel}
                   </div>
                 </>
               ) : (
-                <div>
-                  Загрузка задачи...
-                </div>
+                <div>Загрузка задачи...</div>
               )}
             </CardContent>
           </Card>
@@ -109,13 +126,12 @@ export default function Home() {
               <CardDescription>Напишите свой код Python здесь</CardDescription>
             </CardHeader>
             <CardContent>
-              <CodeEditor
-                code={studentCode}
-                onChange={setStudentCode}
-              />
-              <div className="mt-2 flex justify-end gap-2">
+              <CodeEditor code={studentCode} onChange={setStudentCode} />
+              <div className="mt-2 flex gap-2">
                 <Button onClick={evaluateCode}>Оценить Код</Button>
-                <Button variant="secondary" onClick={getHint}>Получить Подсказку</Button>
+                <Button variant="secondary" onClick={getHint}>
+                  Получить Подсказку
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -127,19 +143,14 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               {feedback ? (
-                <div>
-                  {feedback}
-                </div>
+                <div>{feedback}</div>
               ) : (
-                <div>
-                  Пока нет обратной связи. Отправьте свой код на оценку.
-                </div>
+                <div>Пока нет обратной связи. Отправьте свой код на оценку.</div>
               )}
               {hint ? (
                 <div>
                   <br />
-                  Подсказка:
-                  {hint}
+                  Подсказка: {hint}
                 </div>
               ) : null}
             </CardContent>
