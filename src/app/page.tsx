@@ -61,11 +61,8 @@ export default function Home() {
       <div className="flex h-screen">
         <Sidebar>
           <SidebarHeader>
-            <div>
-              PuskSchool
-              <br/>
+            PuskSchool
               Раскройте свой потенциал в Python
-            </div>
           </SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -75,26 +72,9 @@ export default function Home() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
-          <SidebarFooter>
-            <Avatar>
-              <AvatarImage src="https://picsum.photos/50/50" alt="Аватар"/>
-              <AvatarFallback>АБ</AvatarFallback>
-            </Avatar>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="ml-auto h-8 w-8 p-0">
-                  <span className="sr-only">Открыть меню пользователя</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <Button variant={'link'} onClick={() => alert('Будущий профиль')}>Мой Профиль</Button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarFooter>
-        </Sidebar>
+          
 
+        
         <div className="flex-1 p-4">
           <Card>
             <CardHeader>
@@ -169,3 +149,5 @@ export default function Home() {
     </SidebarProvider>
   );
 }
+
+

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { cn } from '@/lib/utils';
+import React, {useState, useRef, useEffect} from 'react';
+import {cn} from '@/lib/utils';
+import Editor from "@monaco-editor/react";
 
 interface CodeEditorProps {
   code: string;
@@ -9,20 +10,26 @@ interface CodeEditorProps {
   className?: string;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ code, onChange, className }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(e.target.value);
-  };
+const CodeEditor: React.FC<CodeEditorProps> = ({code, onChange, className}) => {
+  const editorRef = useRef(null);
+
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor;
+  }
+
+  const handleOnChange = (value) => {
+    onChange(value);
+  }
 
   return (
-    <textarea
-      className={cn(
-        "w-full h-64 p-4 font-mono text-sm bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner resize-none",
-        className
-      )}
+    <Editor
+      height="400px"
+      width="100%"
+      theme="vs-dark"
+      language="python"
       value={code}
-      onChange={handleChange}
-      placeholder="Напишите свой код Python здесь..."
+      onChange={handleOnChange}
+      onMount={handleEditorDidMount}
     />
   );
 };
