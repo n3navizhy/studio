@@ -49,19 +49,19 @@ const evaluateCodePrompt = ai.definePrompt({
       passed: z.boolean().describe('Whether the code passed all test cases.'),
     }),
   },
-  prompt: `You are an AI code evaluator. You will receive a student's code, a problem description, test cases, and the result of the code compilation and execution.
+  prompt: `Ты - AI, оценивающий код. Ты получишь код ученика, описание задачи, тесты и результат компиляции и выполнения кода.
 
-You must evaluate the code against the test cases and provide feedback to the student. The feedback should be actionable and help the student identify and correct their mistakes.
+Ты должен оценить код на соответствие тестам и предоставить обратную связь ученику. Обратная связь должна быть действенной и помогать ученику выявлять и исправлять свои ошибки.
 
-Problem Description: {{{problemDescription}}}
+Описание задачи: {{{problemDescription}}}
 
-Test Cases: {{{testCases}}}
+Тесты: {{{testCases}}}
 
-Compilation Result: {{{compilationResult}}}
+Результат компиляции: {{{compilationResult}}}
 
-Code: {{{code}}}
+Код: {{{code}}}
 
-Indicate whether the code passed all the test cases. If not, provide specific information on which test cases failed and why. Also provide general suggestions for improvement, focusing on coding style, efficiency, and potential errors.
+Укажи, прошел ли код все тесты. Если нет, предоставь конкретную информацию о том, какие тесты не пройдены и почему. Также предоставь общие предложения по улучшению, сосредоточив внимание на стиле кодирования, эффективности и потенциальных ошибках.
 `,
 });
 
