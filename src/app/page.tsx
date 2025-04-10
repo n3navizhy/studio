@@ -57,110 +57,122 @@ export default function Home() {
   }, []);
 
   return (
-    <SidebarProvider>
-      <div className="flex h-screen">
-        <Sidebar>
-          <SidebarHeader>
-            <div className="px-2">
-              <CardTitle className="text-lg">PyGenius</CardTitle>
-              <CardDescription>Unleash your Python potential</CardDescription>
-            </div>
-          </SidebarHeader>
-          <SidebarContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton onClick={generateProblem}>
-                  <Icons.plusCircle className="mr-2 h-4 w-4"/>
-                  <span>Generate New Problem</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarContent>
-          <SidebarFooter>
-            <div className="flex items-center space-x-2 px-2">
-              <Avatar>
-                <AvatarImage src="https://picsum.photos/50/50" alt="Avatar"/>
-                <AvatarFallback>AB</AvatarFallback>
-              </Avatar>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="ml-auto h-8 w-8 p-0">
-                    <span className="sr-only">Open user menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Button variant={'link'} onClick={() => alert('Future home for profile')}>My Profile</Button>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </SidebarFooter>
-        </Sidebar>
-        <div className="flex-1 p-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Problem</CardTitle>
-                <CardDescription>Solve the following Python problem</CardDescription>
-              </CardHeader>
-              <CardContent>
+    
+      <SidebarProvider>
+        
+          
+            
+              
+                PyGenius
+                Раскройте свой потенциал в Python
+              
+            
+            
+              
+                
+                  
+                    <Icons.plusCircle className="mr-2 h-4 w-4"/>
+                    <span>Сгенерировать новую задачу</span>
+                  
+                
+              
+            
+            
+              
+                
+                  <AvatarImage src="https://picsum.photos/50/50" alt="Аватар"/>
+                  <AvatarFallback>АБ</AvatarFallback>
+                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="ml-auto h-8 w-8 p-0">
+                      <span className="sr-only">Открыть меню пользователя</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>
+                      <Button variant={'link'} onClick={() => alert('Будущий профиль')}>Мой Профиль</Button>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              
+            
+          
+        
+
+        
+          
+            
+              
+                Задача
+                Решите следующую задачу на Python
+              
+              
                 {problem ? (
-                  <>
-                    <p className="font-bold">Description:</p>
-                    <p>{problem.problemDescription}</p>
-                    <br/>
-                    <p className="font-bold">Concept:</p>
-                    <p>{problem.problemConcept}</p>
-                    <br/>
-                    <p className="font-bold">Difficulty:</p>
-                    <p>{problem.difficultyLevel}</p>
-                  </>
+                  
+                    
+                      Описание:
+                      {problem.problemDescription}
+                      
+                      Концепция:
+                      {problem.problemConcept}
+                      
+                      Сложность:
+                      {problem.difficultyLevel}
+                    
+                  
                 ) : (
-                  <p>Loading problem...</p>
+                  
+                    Загрузка задачи...
+                  
                 )}
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Code Editor</CardTitle>
-                <CardDescription>Write your Python code here</CardDescription>
-              </CardHeader>
-              <CardContent>
+              
+            
+            
+              
+                Редактор Кода
+                Напишите свой код Python здесь
+              
+              
                 <Textarea
                   className="w-full"
                   value={studentCode}
                   onChange={(e) => setStudentCode(e.target.value)}
                 />
-                <div className="mt-4 flex justify-between">
-                  <Button onClick={evaluateCode}>Evaluate Code</Button>
-                  <Button variant="secondary" onClick={getHint}>Get Hint</Button>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="md:col-span-2">
-              <CardHeader>
-                <CardTitle>Feedback</CardTitle>
-                <CardDescription>AI-Powered Evaluation</CardDescription>
-              </CardHeader>
-              <CardContent>
+                
+                  Оценить Код
+                  Получить Подсказку
+                
+              
+            
+            
+              
+                Обратная Связь
+                Оценка на основе AI
+              
+              
                 {feedback ? (
-                  <p>{feedback}</p>
+                  
+                    {feedback}
+                  
                 ) : (
-                  <p>No feedback yet. Submit your code for evaluation.</p>
+                  
+                    Пока нет обратной связи. Отправьте свой код на оценку.
+                  
                 )}
                 {hint ? (
-                  <>
-                    <br/>
-                    <p className="font-bold">Hint:</p>
-                    <p>{hint}</p>
-                  </>
+                  
+                    
+                      Подсказка:
+                      {hint}
+                    
+                  
                 ) : null}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </SidebarProvider>
+              
+            
+          
+        
+      
+    
   );
 }
