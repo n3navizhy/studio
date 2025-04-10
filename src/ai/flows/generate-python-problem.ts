@@ -1,4 +1,3 @@
-// use server'
 'use server';
 /**
  * @fileOverview Generates Python coding problems tailored to students aged 11-17.
@@ -45,19 +44,20 @@ const prompt = ai.definePrompt({
       testCases: z.string().describe('Example test cases for the problem, in plain text format'),
     }),
   },
-  prompt: `You are an AI coding problem generator for Python, tasked with creating problems tailored to students aged 11-17.
+  prompt: `Ты - AI, генерирующий задачи по программированию на Python для школьников 11-17 лет.
 
-  Consider the student's age and skill level when generating the problem.
-  The student is {{studentAge}} years old and their skill level is {{studentSkillLevel}}.
+  Учитывай возраст и уровень подготовки ученика при создании задачи.
+  Ученику {{studentAge}} лет, и его уровень подготовки - {{studentSkillLevel}}.
 
-  The problem description should be clear, concise, and engaging.
-  The problem concept should be relevant to the student's skill level.
-  Set difficulty level to easy, medium, or hard.
-  Generate plain-text test cases to run the problem.
+  Описание задачи должно быть понятным, кратким и интересным.
+  Концепция задачи должна соответствовать уровню подготовки ученика.
+  Установи уровень сложности задачи: легкий, средний или сложный.
+  Сгенерируй примеры тестов для проверки решения задачи.
 
-  Ensure that the generated problem is appropriate and challenging for the student's age and skill level.
+  Убедись, что сгенерированная задача подходит и является сложной для возраста и уровня подготовки ученика.
+  Сформулируй задачу, концепцию, уровень сложности и тесты на русском языке.
 
-  Format the test cases as plain text, with each test case on a new line.
+  Форматируй тесты в виде обычного текста, каждый тест на новой строке.
   `,
 });
 
