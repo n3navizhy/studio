@@ -57,122 +57,116 @@ export default function Home() {
   }, []);
 
   return (
-    
-      <SidebarProvider>
-        
-          
-            
-              
-                PyGenius
-                Раскройте свой потенциал в Python
-              
-            
-            
-              
-                
-                  
-                    <Icons.plusCircle className="mr-2 h-4 w-4"/>
-                    <span>Сгенерировать новую задачу</span>
-                  
-                
-              
-            
-            
-              
-                
-                  <AvatarImage src="https://picsum.photos/50/50" alt="Аватар"/>
-                  <AvatarFallback>АБ</AvatarFallback>
-                
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="ml-auto h-8 w-8 p-0">
-                      <span className="sr-only">Открыть меню пользователя</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem>
-                      <Button variant={'link'} onClick={() => alert('Будущий профиль')}>Мой Профиль</Button>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              
-            
-          
-        
+    <SidebarProvider>
+      <div className="flex h-screen">
+        <Sidebar>
+          <SidebarHeader>
+            <div>
+              PyGenius
+              <br/>
+              Раскройте свой потенциал в Python
+            </div>
+          </SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton onClick={generateProblem}>
+                <Icons.plusCircle className="mr-2 h-4 w-4"/>
+                <span>Сгенерировать новую задачу</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarFooter>
+            <Avatar>
+              <AvatarImage src="https://picsum.photos/50/50" alt="Аватар"/>
+              <AvatarFallback>АБ</AvatarFallback>
+            </Avatar>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="ml-auto h-8 w-8 p-0">
+                  <span className="sr-only">Открыть меню пользователя</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <Button variant={'link'} onClick={() => alert('Будущий профиль')}>Мой Профиль</Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarFooter>
+        </Sidebar>
 
-        
-          
-            
-              
-                Задача
-                Решите следующую задачу на Python
-              
-              
-                {problem ? (
-                  
-                    
-                      Описание:
-                      {problem.problemDescription}
-                      
-                      Концепция:
-                      {problem.problemConcept}
-                      
-                      Сложность:
-                      {problem.difficultyLevel}
-                    
-                  
-                ) : (
-                  
-                    Загрузка задачи...
-                  
-                )}
-              
-            
-            
-              
-                Редактор Кода
-                Напишите свой код Python здесь
-              
-              
-                <Textarea
-                  className="w-full"
-                  value={studentCode}
-                  onChange={(e) => setStudentCode(e.target.value)}
-                />
-                
-                  Оценить Код
-                  Получить Подсказку
-                
-              
-            
-            
-              
-                Обратная Связь
-                Оценка на основе AI
-              
-              
-                {feedback ? (
-                  
-                    {feedback}
-                  
-                ) : (
-                  
-                    Пока нет обратной связи. Отправьте свой код на оценку.
-                  
-                )}
-                {hint ? (
-                  
-                    
-                      Подсказка:
-                      {hint}
-                    
-                  
-                ) : null}
-              
-            
-          
-        
-      
-    
+        <div className="flex-1 p-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Задача</CardTitle>
+              <CardDescription>Решите следующую задачу на Python</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {problem ? (
+                <>
+                  <div>
+                    Описание:
+                    {problem.problemDescription}
+                    <br/>
+                    Концепция:
+                    {problem.problemConcept}
+                    <br/>
+                    Сложность:
+                    {problem.difficultyLevel}
+                  </div>
+                </>
+              ) : (
+                <div>
+                  Загрузка задачи...
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Редактор Кода</CardTitle>
+              <CardDescription>Напишите свой код Python здесь</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Textarea
+                className="w-full"
+                value={studentCode}
+                onChange={(e) => setStudentCode(e.target.value)}
+              />
+              <div className="mt-2 flex justify-end gap-2">
+                <Button onClick={evaluateCode}>Оценить Код</Button>
+                <Button variant="secondary" onClick={getHint}>Получить Подсказку</Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Обратная Связь</CardTitle>
+              <CardDescription>Оценка на основе AI</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {feedback ? (
+                <div>
+                  {feedback}
+                </div>
+              ) : (
+                <div>
+                  Пока нет обратной связи. Отправьте свой код на оценку.
+                </div>
+              )}
+              {hint ? (
+                <div>
+                  <br/>
+                  Подсказка:
+                  {hint}
+                </div>
+              ) : null}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 }
