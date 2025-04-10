@@ -62,7 +62,7 @@ export default function Home() {
         <Sidebar>
           <SidebarHeader>
             <div>
-              PyGenius
+              PuskSchool
               <br/>
               Раскройте свой потенциал в Python
             </div>
