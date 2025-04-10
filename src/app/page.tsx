@@ -6,11 +6,11 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {useEffect, useState} from "react";
 import {generatePythonProblem} from "@/ai/flows/generate-python-problem";
-import {Textarea} from "@/components/ui/textarea";
 import {evaluateCodeAndProvideFeedback} from "@/ai/flows/evaluate-code-and-provide-feedback";
 import {generateHintBasedOnCode} from "@/ai/flows/generate-hint-based-on-code";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Icons} from "@/components/icons";
+import CodeEditor from "@/components/code-editor";
 
 export default function Home() {
   const [problem, setProblem] = useState<any>(null);
@@ -129,10 +129,9 @@ export default function Home() {
               <CardDescription>Напишите свой код Python здесь</CardDescription>
             </CardHeader>
             <CardContent>
-              <Textarea
-                className="w-full"
-                value={studentCode}
-                onChange={(e) => setStudentCode(e.target.value)}
+              <CodeEditor
+                code={studentCode}
+                onChange={setStudentCode}
               />
               <div className="mt-2 flex justify-end gap-2">
                 <Button onClick={evaluateCode}>Оценить Код</Button>
