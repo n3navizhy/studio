@@ -1,14 +1,14 @@
 'use client';
 
-import {Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarProvider} from "@/components/ui/sidebar";
-import {Button} from "@/components/ui/button";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import {useEffect, useState} from "react";
-import {generatePythonProblem} from "@/ai/flows/generate-python-problem";
-import {evaluateCodeAndProvideFeedback} from "@/ai/flows/evaluate-code-and-provide-feedback";
-import {generateHintBasedOnCode} from "@/ai/flows/generate-hint-based-on-code";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {Icons} from "@/components/icons";
+import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarProvider } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
+import { generatePythonProblem } from "@/ai/flows/generate-python-problem";
+import { evaluateCodeAndProvideFeedback } from "@/ai/flows/evaluate-code-and-provide-feedback";
+import { generateHintBasedOnCode } from "@/ai/flows/generate-hint-based-on-code";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Icons } from "@/components/icons";
 import CodeEditor from "@/components/code-editor";
 
 export default function Home() {
@@ -61,19 +61,20 @@ export default function Home() {
         <Sidebar>
           <SidebarHeader>
             PuskSchool
-              Раскройте свой потенциал в Python
+            Раскройте свой потенциал в Python
           </SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton onClick={generateProblem}>
-                <Icons.plusCircle className="mr-2 h-4 w-4"/>
+                <Icons.plusCircle className="mr-2 h-4 w-4" />
                 <span>Сгенерировать новую задачу</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
-          
 
-        
+
+        </Sidebar>
+
         <div className="flex-1 p-4">
           <Card>
             <CardHeader>
@@ -86,10 +87,10 @@ export default function Home() {
                   <div>
                     Описание:
                     {problem.problemDescription}
-                    <br/>
+                    <br />
                     Концепция:
                     {problem.problemConcept}
-                    <br/>
+                    <br />
                     Сложность:
                     {problem.difficultyLevel}
                   </div>
@@ -136,7 +137,7 @@ export default function Home() {
               )}
               {hint ? (
                 <div>
-                  <br/>
+                  <br />
                   Подсказка:
                   {hint}
                 </div>
@@ -148,6 +149,3 @@ export default function Home() {
     </SidebarProvider>
   );
 }
-
-
-
