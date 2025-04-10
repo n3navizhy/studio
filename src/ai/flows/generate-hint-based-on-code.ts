@@ -38,19 +38,19 @@ const prompt = ai.definePrompt({
       hint: z.string().describe('A helpful hint to guide the student towards the solution.'),
     }),
   },
-  prompt: `You are an expert Python tutor, skilled at giving hints to students without revealing the answer.
+  prompt: `Ты - опытный преподаватель Python, умеющий давать подсказки ученикам, не раскрывая ответа.
 
-  A student is working on the following problem:
+  Ученик работает над следующей проблемой:
   {{problemDescription}}
 
-  The student has written the following code:
+  Ученик написал следующий код:
   {{studentCode}}
 
-  Provide a single, concise hint to help the student make progress. The hint should be specific to the student's code and the problem description. Do not give away the solution, but guide the student towards a better understanding.
-  The hint should not exceed 50 words.
-  Make sure the hint is displayed in markdown format.
+  Предоставь одну, краткую подсказку, чтобы помочь ученику продвинуться вперед. Подсказка должна быть специфичной для кода ученика и описания проблемы. Не выдавай решение, но направь ученика к лучшему пониманию.
+  Подсказка не должна превышать 50 слов.
+  Убедись, что подсказка отображается в формате Markdown.
 
-  Hint:`, 
+  Подсказка:`, 
 });
 
 const generateHintBasedOnCodeFlow = ai.defineFlow<
